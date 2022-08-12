@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
+#include <ctype.h>
+
+int i, totalCaixasGeradas, qtdCaixas[5000];
+int caixasAvenda[5000], caixasAvariadas[5000];
+ int op=1;
+
+int main(int argc, char *argv[]){
+
+    do{
+
+    printf("\n ");
+    printf("\n (0) - Enviar caixa mais apta para a venda");
+    printf("\n (1) - Informar concerto de caixa");
+    printf("\n (2) - Visualizar Caixas a venda");
+    printf("\n (3) - Visualizar Caixas avariadas");
+    printf("\n (4) - GERAR CODIGOS");
+    printf("\n (5) - Caixa mais apta para a venda foi avariada");
+    printf("\n (6) - Sair");
+    printf("\n (7) - Caixas disponiveis");
+    printf("\n ");
+     printf("\n O que deseja fazer ? \n");
+        scanf("%d", &op);
+        system("cls");
+
+        switch(op)
+        {
+            case 0:
+
+                 printf("\n CAIXAS ENVIADAS PARA APTAS PARA A VENDA....");
+                caixasAvenda[i] = qtdCaixas[i-1] ;
+                qtdCaixas[i-1]=NULL;
+                printf("\n ");
+                break;
+
+
+
+            case 1:
+                printf("\n (1) - Informar concerto de caixa.......");
+                caixasAvenda[i] = qtdCaixas[i-1] ;
+                caixasAvariadas[i]=NULL;
+                printf("\n ");
+
+                break;
+
+            case 2:
+                 printf("\n (2) - Visualizar Caixas a venda");
+        printf("\n%d", caixasAvenda[i]);
+        printf("\n ");
+                break;
+
+            case 3:
+                printf("\n (3) - Visualizar Caixas avariadas");
+                  printf("\n%d", caixasAvariadas[i]);
+        printf("\n ");
+
+                break;
+
+            case 4:
+                     /*GERANDO CÓDIGOS ALEATORIOS PARA AS NOVAS CAIXAS*/
+       /*srand(time(NULL));*/
+
+     printf("\n Informe a quantidade de caixas a serem geradas: \n");
+    scanf("%d",&totalCaixasGeradas);
+    system("cls");
+
+for (i = 0; i < totalCaixasGeradas; i++){
+    qtdCaixas[i]=rand() % 5000;
+}
+                    /*MENU*/
+     printf("\n ***FAZENDA MITSKI*** ");
+     printf("\n ");
+     printf("\n Caixas Disponiveis: %d ", i+0 );
+      printf("\n ");
+
+   /*IMPRIMINDO CAIXAS GERADAS E ORDENANDO CÓDIGOS*/
+
+   for (i = 0; i < totalCaixasGeradas; i++)
+      printf("\n%d", qtdCaixas[i]);
+      printf("\n ");
+
+                break;
+
+                case 5:
+                 printf("\n CAIXAS AVARIADAS.....");
+                caixasAvariadas[i] = qtdCaixas[i-1] ;
+                caixasAvenda[i]=NULL;
+                printf("\n ");
+
+                break;
+
+                case 6:
+                    system("cls");
+
+                   printf("\n SAINDO ATE LOGO \n\n by NASCIMENTO, Henrique");
+                    printf("\n");
+                    return 0;
+                break;
+
+                case 7:
+                printf("\n Caixas Disponiveis");
+
+   for (i = 0; i < totalCaixasGeradas; i++)
+      printf("\n%d", qtdCaixas[i]);
+      printf("\n ");
+
+                break;
+
+            default:
+                printf("Digite uma opcao valida\n");
+                break;
+        }
+
+    } while(op!=6);
+    system("pause");
+    return 0;
+    getchar();
+}
