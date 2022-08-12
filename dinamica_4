@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+void  CopiaArquivo (FILE *arqEntrada, FILE *arqSaida);
+FILE *AbreArquivo (string prompt, string modo);
+
+
+/*Seção 2: Tipos-de-dados*/
+//////////////////////////
+
+typedef char *string;
+
+
+/*Seção 3: Programa principal*/
+//////////////////////////////
+
+int main (void)
+{
+   printf ("Este programa faz uma cópia do arquivo dado.\n");
+   FILE *arqEntrada, *arqSaida;
+   arqEntrada = AbreArquivo ("Arquivo velho: ", "r");
+   arqSaida = AbreArquivo ("Arquivo novo: ", "w");
+   CopiaArquivo (arqEntrada, arqSaida);
+   fclose (arqEntrada);
+   fclose (arqSaida);
+   return EXIT_SUCCESS;
+}
+
+
+
+void CopiaArquivo (FILE *arqEntrada, FILE *arqSaida)
+{
+   int ch;
+   while ((ch = getc (arqEntrada)) != EOF)
+       putc (ch, arqSaida);
+}
+
+
+
+
+FILE *AbreArquivo (string prompt, string modo)
+{
+   string nomeDoArq;
+   FILE *resultado;
+   while (true) {
+       printf ("%s", prompt); // fputs (prompt, stdout)
+       nomeDoArq = readLine (stdin);
+       resultado = fopen (nomeDoArq, modo);
+       if (resultado != NULL) break;
+       printf ("Não posso abrir o arquivo %s\n", nomeDoArq);
+   }
+   return resultado;
+}
