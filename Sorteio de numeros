@@ -1,0 +1,49 @@
+ng generate component number-picker
+<h2>Sortear número dentro de um intervalo</h2>
+
+<label for="min">Valor mínimo:</label>
+<input type="number" name="min" [(ngModel)]="minValue">
+
+<label for="max">Valor máximo:</label>
+<input type="number" name="max" [(ngModel)]="maxValue">
+
+<button (click)="pickNumber()">Sortear número</button>
+
+<p *ngIf="pickedNumber">O número sorteado é {{pickedNumber}}</p>
+
+<h2>Sortear número de uma lista</h2>
+
+<label for="numbers">Lista de números (separados por vírgula):</label>
+<input type="text" name="numbers" [(ngModel)]="numberList">
+
+<button (click)="pickNumberFromList()">Sortear número</button>
+
+<p *ngIf="pickedNumberFromList">O número sorteado é {{pickedNumberFromList}}</p>
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-number-picker',
+  templateUrl: './number-picker.component.html',
+  styleUrls: ['./number-picker.component.css']
+})
+export class NumberPickerComponent {
+  minValue: number = 1;
+  maxValue: number = 100;
+  pickedNumber: number;
+
+  numberList: string = '';
+  pickedNumberFromList: number;
+
+  pickNumber() {
+    this.pickedNumber = Math.floor(Math.random() * (this.maxValue - this.minValue + 1)) + this.minValue;
+    this.pickedNumberFromList = null;
+  }
+
+  pickNumberFromList() {
+    const numbers = this.numberList.split(',');
+    const randomIndex = Math.floor(Math.random() * numbers.length);
+    this.pickedNumberFromList = parseInt(numbers[randomIndex].trim(), 10);
+    this.pickedNumber = null;
+  }
+}
+<app-number-picker></app-number-picker>
