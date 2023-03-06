@@ -1,0 +1,49 @@
+ng generate component meme-generator
+<h2>Gerador de memes</h2>
+
+<button (click)="getMeme()">Gerar meme</button>
+
+<div *ngIf="meme">
+  <img [src]="meme.url" [alt]="meme.title">
+</div>
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+interface Meme {
+  id: string;
+  title: string;
+  url: string;
+}
+
+@Component({
+  selector: 'app-meme-generator',
+  templateUrl: './meme-generator.component.html',
+  styleUrls: ['./meme-generator.component.css']
+})
+export class MemeGeneratorComponent {
+  meme: Meme;
+
+  constructor(private http: HttpClient) {}
+
+  getMeme() {
+    this.http.get<Meme>('https://meme-api.herokuapp.com/gimme')
+      .subscribe(meme => {
+        this.meme = meme;
+      });
+  }
+}
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  declarations: [
+    AppComponent,
+    MemeGeneratorComponent
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+<app-meme-generator></app-meme-generator>
